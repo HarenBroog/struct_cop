@@ -9,6 +9,8 @@ defmodule StructCop.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       test_coverage: [tool: ExCoveralls],
+      test_paths: ["lib"],
+      test_pattern: "*.test.exs",
       preferred_cli_env: [
         coveralls: :test,
         "coveralls.detail": :test,
