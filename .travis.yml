@@ -1,0 +1,14 @@
+language: elixir
+elixir:
+  - 1.8.2
+  - 1.9.1
+otp_release:
+  - 20.0
+  - 21.0
+  - 22.0
+env:
+  - MIX_ENV=test
+script:
+  - mix deps.get
+  - mix format --check-formatted
+  - mix coveralls.travis
