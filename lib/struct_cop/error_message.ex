@@ -3,8 +3,8 @@ defmodule StructCop.ErrorMessage do
     """
     cast failed for struct #{changeset.data |> inspect()}:
 
-    changes:
-      #{changeset.changes |> inspect()}
+    params:
+      #{changeset.params |> inspect()}
     errors:
       #{changeset.errors |> inspect()}
     """
