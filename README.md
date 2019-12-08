@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/HarenBroog/struct_cop.svg?branch=master)](https://travis-ci.org/HarenBroog/struct_cop.svg?branch=master) [![Coverage Status](https://coveralls.io/repos/github/HarenBroog/struct_cop/badge.svg?branch=master)](https://coveralls.io/github/HarenBroog/struct_cop?branch=master)
+
 # StructCop
 
 **TODO: Add description**
