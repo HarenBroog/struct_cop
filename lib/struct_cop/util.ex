@@ -1,4 +1,6 @@
 defmodule StructCop.Util do
+  @moduledoc false
+
   @config %StructCop.Config{}
 
   def destructurize_many(maybe_structs) when is_list(maybe_structs) do
