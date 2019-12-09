@@ -17,7 +17,10 @@ defmodule StructCop.MixProject do
         "coveralls.post": :test,
         "coveralls.html": :test
       ],
-      deps: deps()
+      deps: deps(),
+      name: "StructCop",
+      source_url: "https://github.com/HarenBroog/struct_cop",
+      docs: docs()
     ]
   end
 
@@ -34,7 +37,22 @@ defmodule StructCop.MixProject do
     [
       {:ecto, "~> 3.1"},
       {:excoveralls, "~> 0.11.1", only: :test},
+      {:ex_doc, "~> 0.21", only: :dev, runtime: false},
       {:mix_test_watch, "~> 0.9.0", only: [:test, :dev]}
+    ]
+  end
+
+  defp docs do
+    [
+      main: "StructCop",
+      canonical: "http://hexdocs.pm/struct_cop",
+      extra_section: "Pages",
+      extras: [
+        "docs/examples/commands.md"
+      ],
+      groups_for_extras: [
+        Examples: ~r/docs\/examples\/.?/
+      ]
     ]
   end
 end
