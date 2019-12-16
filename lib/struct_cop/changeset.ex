@@ -28,7 +28,7 @@ defmodule StructCop.Changeset do
         end
 
       cast_function =
-        if function_exported?(embed_module, :__struct_cop__, 0) do
+        if Util.struct_cop?(embed_module) do
           fn struct, attrs ->
             struct
             |> embed_module.changeset(attrs)

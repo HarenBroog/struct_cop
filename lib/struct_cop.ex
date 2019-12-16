@@ -6,80 +6,38 @@ defmodule StructCop do
 
   alias StructCop.Util
 
-  defmacro __using__(_) do
-    quote do
-      @behaviour StructCop
-      import StructCop, only: [contract: 1]
-
-      def changeset(%_{} = struct, attrs \\ %{}) do
-        struct
-        |> StructCop.Changeset.cast_all(attrs)
-      end
-
-      def validate(changeset), do: changeset
-
-      def new(attrs \\ %{}) do
-        __MODULE__.__struct__()
-        |> StructCop.cast(attrs)
-      end
-
-      def new!(attrs \\ %{}) do
-        __MODULE__.__struct__()
-        |> StructCop.cast!(attrs)
-      end
-
-      def __struct_cop__, do: true
-
-      defdelegate cast(struct), to: StructCop
-      defdelegate cast!(struct), to: StructCop
-      defdelegate cast(struct, attrs), to: StructCop
-      defdelegate cast!(struct, attrs), to: StructCop
-
-      defoverridable changeset: 2
-      defoverridable validate: 1
-    end
+  defmacro __using__(args) do
+    StructCop.Macro.use(args)
   end
 
-  defmacro contract(do: block) do
-    quote do
-      use Ecto.Schema
-
-      @primary_key false
-      embedded_schema do
-        unquote(block)
-      end
-    end
-  end
-
-  def cast(%struct_mod{} = struct) do
-    struct_mod
-    |> struct()
-    |> cast(struct)
+  defmacro contract(args) do
+    StructCop.Macro.contract(args)
   end
 
   def cast(%struct_mod{} = struct, attrs) do
     import Ecto.Changeset
 
-    struct
-    |> struct_mod.changeset(attrs |> Util.destructurize())
-    |> struct_mod.validate()
-    |> case do
-      %Ecto.Changeset{valid?: true} = changeset ->
-        {:ok, changeset |> apply_changes()}
+    with {:ok, _} <- struct |> Util.ensure() do
+      struct
+      |> struct_mod.changeset(attrs |> Util.destructurize())
+      |> struct_mod.validate()
+      |> case do
+        %Ecto.Changeset{valid?: true} = changeset ->
+          {:ok, changeset |> apply_changes()}
 
-      changeset ->
-        {:error, changeset}
+        changeset ->
+          {:error, changeset}
+      end
     end
   end
 
-  def cast!(%struct_mod{} = struct) do
-    struct_mod
-    |> struct()
-    |> cast!(struct)
+  def cast(_not_struct, _attrs) do
+    {:error, :invalid_struct}
   end
 
   def cast!(struct, attrs) do
     struct
+    |> Util.ensure!()
     |> cast(attrs)
     |> case do
       {:ok, result} ->
