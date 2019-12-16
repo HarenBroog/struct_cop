@@ -1,4 +1,4 @@
-# Commands
+# Use cases
 
 Sometimes, especially in non-**CRUD** domains the user actions cannot be directly mapped into the database entities along with their changesets.  But still, from a frontend perspective they should be perceived as a whole. One typical example of such action, can be a registration process. It can be represented like this:
 
