@@ -1,4 +1,6 @@
 defmodule StructCop.Macro do
+  @moduledoc false
+
   def use(_args) do
     quote do
       @behaviour StructCop

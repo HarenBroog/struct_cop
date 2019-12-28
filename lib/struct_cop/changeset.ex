@@ -1,4 +1,6 @@
 defmodule StructCop.Changeset do
+  @moduledoc false
+
   alias StructCop.Util
   import Ecto.Changeset
 

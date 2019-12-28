@@ -44,11 +44,12 @@ defmodule StructCop.MixProject do
 
   defp docs do
     [
-      main: "StructCop",
+      main: "README",
       canonical: "http://hexdocs.pm/struct_cop",
       extra_section: "Pages",
       extras: [
-        "docs/examples/commands.md"
+        "README.md",
+        "docs/examples/use_cases.md"
       ],
       groups_for_extras: [
         Examples: ~r/docs\/examples\/.?/
