@@ -1,6 +1,10 @@
-[![Build Status](https://travis-ci.org/HarenBroog/struct_cop.svg?branch=master)](https://travis-ci.org/HarenBroog/struct_cop.svg?branch=master) [![Coverage Status](https://coveralls.io/repos/github/HarenBroog/struct_cop/badge.svg?branch=master)](https://coveralls.io/github/HarenBroog/struct_cop?branch=master)
-
 # StructCop
+
+[![Build Status](https://travis-ci.org/HarenBroog/struct_cop.svg?branch=master)](https://travis-ci.org/HarenBroog/struct_cop.svg?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/HarenBroog/struct_cop/badge.svg?branch=master)](https://coveralls.io/github/HarenBroog/struct_cop?branch=master)
+[![Hex.pm](https://img.shields.io/hexpm/v/struct_cop.svg)](https://hex.pm/packages/struct_cop)
+[![Hex.pm](https://img.shields.io/hexpm/dt/struct_cop.svg)](https://hex.pm/packages/struct_cop)
+
 
 StructCop is a library that was aimed to introduce **data correctness** and **type corecion** into Elixir structs. It also simplifies building valid structs with **smart constructors**.
 
