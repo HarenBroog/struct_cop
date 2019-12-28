@@ -50,7 +50,7 @@ defmodule StructCop.MixProject do
 
   defp docs do
     [
-      main: "README",
+      main: "readme",
       canonical: "http://hexdocs.pm/struct_cop",
       extra_section: "Pages",
       extras: [
