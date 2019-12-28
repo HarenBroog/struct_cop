@@ -19,8 +19,10 @@ defmodule StructCop.MixProject do
       ],
       deps: deps(),
       name: "StructCop",
+      description: description(),
       source_url: "https://github.com/HarenBroog/struct_cop",
-      docs: docs()
+      docs: docs(),
+      package: package()
     ]
   end
 
@@ -42,6 +44,10 @@ defmodule StructCop.MixProject do
     ]
   end
 
+  defp description do
+    "StructCop is a library that was aimed to introduce data correctness and type corecion into Elixir structs. It also simplifies building valid structs with smart constructors."
+  end
+
   defp docs do
     [
       main: "README",
@@ -54,6 +60,13 @@ defmodule StructCop.MixProject do
       groups_for_extras: [
         Examples: ~r/docs\/examples\/.?/
       ]
+    ]
+  end
+
+  defp package do
+    [
+      licenses: ["Apache-2.0"],
+      links: %{"GitHub" => "https://github.com/HarenBroog/struct_cop"}
     ]
   end
 end
