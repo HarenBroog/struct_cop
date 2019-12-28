@@ -65,6 +65,7 @@ defmodule StructCop.MixProject do
 
   defp package do
     [
+      maintainers: ["Damian Romanów"],
       licenses: ["Apache-2.0"],
       links: %{"GitHub" => "https://github.com/HarenBroog/struct_cop"}
     ]
