@@ -6,7 +6,7 @@
 [![Hex.pm](https://img.shields.io/hexpm/dt/struct_cop.svg)](https://hex.pm/packages/struct_cop)
 
 
-StructCop is a library that was aimed to introduce **data correctness** and **type corecion** into Elixir structs. It also simplifies building valid structs with **smart constructors**.
+StructCop is a library that was aimed to introduce **data correctness** and **type coercion** into Elixir structs. It also simplifies building valid structs with **smart constructors**.
 
 ## Getting Started
 
