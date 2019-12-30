@@ -19,7 +19,7 @@ defmodule StructCop do
 
     with {:ok, _} <- struct |> Util.ensure() do
       struct
-      |> struct_mod.changeset(attrs |> Util.destructurize())
+      |> struct_mod.changeset(attrs)
       |> struct_mod.validate()
       |> case do
         %Ecto.Changeset{valid?: true} = changeset ->

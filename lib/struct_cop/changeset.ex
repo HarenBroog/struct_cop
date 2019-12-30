@@ -8,7 +8,7 @@ defmodule StructCop.Changeset do
     changeset =
       struct
       |> cast(
-        attrs,
+        Util.destructurize(attrs),
         struct_mod.__schema__(:fields) -- struct_mod.__schema__(:embeds)
       )
 
