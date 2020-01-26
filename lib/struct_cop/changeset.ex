@@ -4,7 +4,16 @@ defmodule StructCop.Changeset do
   alias StructCop.Util
   import Ecto.Changeset
 
-  def cast_all(%struct_mod{} = struct, attrs \\ %{}) do
+  def cast_all(%_{} = struct, attrs \\ %{}) do
+    struct_mod =
+      case struct do
+        %Ecto.Changeset{data: %struct_mod{}} ->
+          struct_mod
+
+        %struct_mod{} ->
+          struct_mod
+      end
+
     changeset =
       struct
       |> cast(
