@@ -7,11 +7,9 @@ defmodule StructCop do
   alias StructCop.Util
 
   defmacro __using__(args) do
-    StructCop.Macro.use(args)
-  end
-
-  defmacro contract(args) do
-    StructCop.Macro.contract(args)
+    quote do
+      use StructCop.Macro, unquote(args)
+    end
   end
 
   def cast(%struct_mod{} = struct, attrs) do

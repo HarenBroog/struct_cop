@@ -1,10 +1,11 @@
 defmodule StructCop.Macro do
   @moduledoc false
 
-  def use(_args) do
+  defmacro __using__(_args) do
     quote do
       @behaviour StructCop
-      import StructCop, only: [contract: 1]
+      require StructCop.Macro
+      import StructCop.Macro, only: [contract: 1]
 
       def changeset(%_{} = struct, attrs \\ %{}) do
         struct
@@ -30,7 +31,7 @@ defmodule StructCop.Macro do
     end
   end
 
-  def contract(do: block) do
+  defmacro contract(do: block) do
     quote do
       use Ecto.Schema
 
