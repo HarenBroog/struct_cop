@@ -13,3 +13,8 @@ script:
   - mix deps.get
   - mix format --check-formatted
   - mix coveralls.travis
+
+jobs:
+  exclude:
+    - elixir: 1.10.0
+      otp_release: 20.0
