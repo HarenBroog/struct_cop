@@ -59,6 +59,10 @@ defmodule TestStruct do
     embeds_many :nesteds, Nested
     embeds_one :nested, Nested
     embeds_one :nested_ecto, EctoSchema
+
+    embeds_one :inline, InlineSchema do
+      field :c, :integer
+    end
   end
 
   def validate(changeset) do

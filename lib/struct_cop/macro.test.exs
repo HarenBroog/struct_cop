@@ -12,7 +12,8 @@ defmodule StructCop.MacroTest do
                :map,
                :nesteds,
                :nested,
-               :nested_ecto
+               :nested_ecto,
+               :inline
              ] = TestStruct.__schema__(:fields)
     end
   end
