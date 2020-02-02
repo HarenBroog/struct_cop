@@ -17,7 +17,7 @@ Add `struct_cop`to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:struct_cop, "~> 0.1.0"}
+    {:struct_cop, "~> 0.2.0"}
   ]
 end
 ```
