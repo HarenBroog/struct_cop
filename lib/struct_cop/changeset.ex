@@ -39,14 +39,19 @@ defmodule StructCop.Changeset do
         end
 
       cast_function =
-        if Util.struct_cop?(embed_module) do
-          fn struct, attrs ->
-            struct
-            |> embed_module.changeset(attrs)
-            |> embed_module.validate()
-          end
-        else
-          &embed_module.changeset/2
+        cond do
+          Util.struct_cop?(embed_module) ->
+            fn struct, attrs ->
+              struct
+              |> embed_module.changeset(attrs)
+              |> embed_module.validate()
+            end
+
+          function_exported?(embed_module, :changeset, 2) ->
+            &embed_module.changeset/2
+
+          true ->
+            &cast_all/2
         end
 
       changeset
