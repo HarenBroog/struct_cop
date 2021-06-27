@@ -6,7 +6,7 @@ defmodule StructCop.ErrorMessageTest do
   def changeset do
     import Ecto.Changeset
 
-    %TestStruct{}
+    TestStruct.new!()
     |> cast(%{a: 4}, [:a])
     |> validate_number(:a, greater_than: 5)
     |> validate_number(:a, less_than: 3)
