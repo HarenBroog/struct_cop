@@ -3,12 +3,12 @@ defmodule StructCopTest do
 
   describe "cast!/2" do
     test "returns struct" do
-      assert %TestStruct{a: 4} = %TestStruct{} |> StructCop.cast!(a: 4)
+      assert %TestStruct{a: 4} = TestStruct.new!() |> StructCop.cast!(a: 4)
     end
 
     test "raises ArgumentError for invalid attrs" do
       assert_raise ArgumentError, fn ->
-        %TestStruct{}
+        TestStruct.new!()
         |> StructCop.cast!(a: 5)
       end
     end
@@ -28,16 +28,16 @@ defmodule StructCopTest do
 
   describe "cast/2" do
     test "returns {:ok, struct}" do
-      assert {:ok, %TestStruct{a: 4}} = %TestStruct{} |> StructCop.cast(a: 4)
+      assert {:ok, %TestStruct{a: 4}} = TestStruct.new!() |> StructCop.cast(a: 4)
     end
 
     test "handles struct as attrs" do
-      assert {:ok, %TestStruct{a: 4}} = %TestStruct{} |> StructCop.cast(%TestStruct{a: 4})
+      assert {:ok, %TestStruct{a: 4}} = TestStruct.new!() |> StructCop.cast(TestStruct.new!(a: 4))
     end
 
     test "returns {:error, %Ecto.Changeset{}} for invalid attrs" do
       assert {:error, %Ecto.Changeset{valid?: false, errors: errors}} =
-               %TestStruct{} |> StructCop.cast(a: 3)
+               TestStruct.new!() |> StructCop.cast(a: 3)
 
       assert :a in Keyword.keys(errors)
     end
@@ -56,21 +56,21 @@ defmodule StructCopTest do
   describe "cast/2 for compound fileds" do
     test "casts array field" do
       assert {:ok, %TestStruct{array: [1, 2, 3]}} =
-               %TestStruct{} |> StructCop.cast(array: [1, 2, 3])
+               TestStruct.new!() |> StructCop.cast(array: [1, 2, 3])
     end
 
     test "casts map field" do
       assert {:ok, %TestStruct{map: %{abc: 1, cde: 2}}} =
-               %TestStruct{} |> StructCop.cast(map: %{abc: 1, cde: 2})
+               TestStruct.new!() |> StructCop.cast(map: %{abc: 1, cde: 2})
     end
   end
 
   test "cast/2 for embeds_one with nested StructCop" do
     assert {:ok, %TestStruct{nested: %TestStruct.Nested{a: 1, b: 2}}} =
-             %TestStruct{} |> StructCop.cast(nested: %{a: 1, b: 2})
+             TestStruct.new!() |> StructCop.cast(nested: %{a: 1, b: 2})
 
     assert {:error, %Ecto.Changeset{valid?: false, changes: %{nested: nested_changeset}}} =
-             %TestStruct{} |> StructCop.cast(nested: %{b: 2})
+             TestStruct.new!() |> StructCop.cast(nested: %{b: 2})
 
     assert %Ecto.Changeset{valid?: false, errors: errors} = nested_changeset
 
@@ -79,10 +79,10 @@ defmodule StructCopTest do
 
   test "cast/2 for embeds_many with nested StructCop" do
     assert {:ok, %TestStruct{nesteds: [%TestStruct.Nested{a: 1, b: 2}]}} =
-             %TestStruct{} |> StructCop.cast(nesteds: [%{a: 1, b: 2}])
+             TestStruct.new!() |> StructCop.cast(nesteds: [%{a: 1, b: 2}])
 
     assert {:error, %Ecto.Changeset{valid?: false, changes: %{nesteds: [nested_changeset]}}} =
-             %TestStruct{} |> StructCop.cast(nesteds: [%{b: 2}])
+             TestStruct.new!() |> StructCop.cast(nesteds: [%{b: 2}])
 
     assert %Ecto.Changeset{valid?: false, errors: errors} = nested_changeset
 
@@ -93,18 +93,19 @@ defmodule StructCopTest do
     assert {:ok,
             %TestStruct{
               nesteds: [
-                %TestStruct.Nested{a: 1, b: 2, deeply_nesteds: [%TestStruct.DeeplyNested{a: 1}]}
+                %TestStruct.Nested{a: 1, b: 2, deeply_nesteds: [%TestStruct.MyStruct{a: 1}]}
               ]
             }} =
-             %TestStruct{} |> StructCop.cast(nesteds: [%{a: 1, b: 2, deeply_nesteds: [%{a: 1}]}])
+             TestStruct.new!()
+             |> StructCop.cast(nesteds: [%{a: 1, b: 2, deeply_nesteds: [%{a: 1}]}])
   end
 
   test "cast/2 for embeds_one with nested embedded_schema" do
     assert {:ok, %TestStruct{nested_ecto: %TestStruct.EctoSchema{a: 1}}} =
-             %TestStruct{} |> StructCop.cast(nested_ecto: %{a: 1})
+             TestStruct.new!() |> StructCop.cast(nested_ecto: %{a: 1})
 
     assert {:error, %Ecto.Changeset{valid?: false, changes: %{nested_ecto: nested_changeset}}} =
-             %TestStruct{} |> StructCop.cast(nested_ecto: %{b: 2})
+             TestStruct.new!() |> StructCop.cast(nested_ecto: %{b: 2})
 
     assert %Ecto.Changeset{valid?: false, errors: errors} = nested_changeset
 

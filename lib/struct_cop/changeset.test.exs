@@ -6,14 +6,14 @@ defmodule StructCop.ChangesetTest do
   describe "cast_all/2" do
     test "works with %Ecto.Changeset{}" do
       assert %Ecto.Changeset{changes: %{b: 4, a: 4}} =
-               %TestStruct{}
+               TestStruct.new!()
                |> cast(%{a: 4}, [:a])
                |> Subject.cast_all(b: 4)
     end
 
     test "fallbacks to &cast_all/2 for embeds without changeset" do
       assert %Ecto.Changeset{changes: %{inline: %Ecto.Changeset{changes: %{c: 10}}}} =
-               %TestStruct{}
+               TestStruct.new!()
                |> Subject.cast_all(inline: %{c: 10})
     end
   end
