@@ -25,6 +25,7 @@ defmodule StructCop.Macro do
       end
 
       def __struct_cop__, do: true
+      def __struct_cop_enforce_constructor__, do: true
 
       defoverridable changeset: 2
       defoverridable validate: 1
