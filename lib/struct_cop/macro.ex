@@ -7,7 +7,7 @@ defmodule StructCop.Macro do
       require StructCop.Macro
       import StructCop.Macro, only: [contract: 1]
 
-      def changeset(%_{} = struct, attrs \\ %{}) do
+      def changeset(%_{} = struct, attrs) do
         struct
         |> StructCop.Changeset.cast_all(attrs)
       end
