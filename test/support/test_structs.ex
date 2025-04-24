@@ -14,18 +14,16 @@ defmodule TestStruct.EctoSchema do
   end
 end
 
-defmodule TestStruct.DeeplyNested do
+defmodule TestStruct.Ordinary do
+  defstruct [:a, :b]
+end
+
+defmodule TestStruct.MyStruct do
   use StructCop
 
   contract do
     field :a, :integer
-  end
-
-  def validate(changeset) do
-    import Ecto.Changeset
-
-    changeset
-    |> validate_required([:a])
+    field :b, :integer
   end
 end
 
@@ -35,7 +33,7 @@ defmodule TestStruct.Nested do
   contract do
     field :a, :integer
     field :b, :integer
-    embeds_many :deeply_nesteds, TestStruct.DeeplyNested
+    embeds_many :deeply_nesteds, TestStruct.MyStruct
   end
 
   def validate(changeset) do
